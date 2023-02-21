@@ -17,7 +17,7 @@ export const productsSlice = createSlice({
         },
         getProducts: (state, action) => {
             state.products = action.payload;
-            toast('wow');
+            
         },
         getSingleProduct: (state, action) => {
             const products = state.products;
