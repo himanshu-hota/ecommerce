@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 import Product from './Product';
 
 
-const Products = () => {
+const ProductsList = () => {
 
-
+    // products from store
     let products = useSelector(state => state.productsReducer.products);
     
     return (
@@ -22,4 +22,5 @@ const Products = () => {
     )
 }
 
-export default Products;
+
+export default ProductsList;

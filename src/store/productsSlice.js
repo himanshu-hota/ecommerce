@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { toast } from 'react-toastify';
+
+// Initial state for the store
 const initialState = {
     products: [],
     cart: [],
@@ -8,37 +9,46 @@ const initialState = {
     loading: false
 }
 
+
 export const productsSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
         setLoading: (state, action) => {
+            //loading state
             state.loading = action.payload;
         },
-        getProducts: (state, action) => {
+        setProducts: (state, action) => {
+            // set products to store
             state.products = action.payload;
-            
         },
         getSingleProduct: (state, action) => {
+            // products
             const products = state.products;
+            // product id
             const productId = action.payload;
+            // find product from store
             const product = products.find(item => item.id === productId);
+            // set single product
             state.singleProduct = product;
         },
         updateProducts: (state, action) => {
-            console.log('update called!');
-            // const productId = Number(action.payload.id); //re
+            // product id
             const productId = action.payload.id;
+            // pruducts
             const products = state.products;
+            // product index in the store
             let productIndex = products.findIndex((product => product.id === productId));
-            console.log(productIndex);
-            //Update contact here.
+            // Update contact here.
             state.products[productIndex] = action.payload;
 
         },
-        addProduct:(state,action) => {
+        addProduct: (state, action) => {
+            // products            
             const products = state.products;
+            // product to add
             const product = action.payload;
+            // add data to store
             products.push(product);
         },
         setTempData: (state, action) => {
@@ -46,94 +56,124 @@ export const productsSlice = createSlice({
         },
         deleteProduct: (state, action) => {
             state.loading = true;
+            // product id
             const productId = action.payload;
+            // products
             const products = state.products;
+            // updated products data
             const updatedProducts = products.filter(product => product.id !== productId);
+            // update data to store
             state.products = updatedProducts;
             state.loading = false;
         },
         addToCart: (state, action) => {
             state.loading = true;
-            // const productId = Number(action.payload); //re
+            // product id
             const productId = action.payload;
+            // product to add
             const dataToAdd = state.products.find(item => item.id === productId);
-
+            // check if cart has already the same product
             if (state.cart.some(item => item.id === productId)) {
+                // increase total items
                 state.totalItem++;
                 const cartItem = state.cart.find(item => item.id === productId);
+                // increset product quantity
                 cartItem.qty++;
 
             } else {
-                state.totalItem++;
+                // if not then add it to cart
                 state.cart.push(dataToAdd);
+                // increase total items
+                state.totalItem++;
             }
             state.loading = false;
         },
-        removeFromCart:(state,action) => {
+        removeFromCart: (state, action) => {
+            // product id
             const productId = action.payload;
+            // cart data
             const products = state.cart;
+            // product to remove
             const dataToRemove = state.cart.find(item => item.id === productId);
+            // updated product data
             const updatedProducts = products.filter(product => product.id !== productId);
+            // increase total items
             state.totalItem = state.totalItem - dataToRemove.qty;
+            // update cart data
             state.cart = updatedProducts;
         },
-        removeOneItemFromCart:(state,action)  => {
-            
-            // const productId = Number(action.payload); //re
+        removeOneItemFromCart: (state, action) => {
+            // product id
             const productId = action.payload;
-            const dataToAdd = state.cart.find(item => item.id === productId);
-            if(dataToAdd.qty <= 1){
+            // product to remove
+            const dataToRemove = state.cart.find(item => item.id === productId);
+
+            // if quantity is less than 0 then remove it from cart
+            if (dataToRemove.qty <= 1) {
                 const productId = action.payload;
                 const products = state.cart;
                 const updatedProducts = products.filter(product => product.id !== productId);
                 state.cart = updatedProducts;
             }
-            dataToAdd.qty--;
+
+            // decrease the quantity
+            dataToRemove.qty--;
+            // decrease total quantity
             state.totalItem--;
         },
         addOneItemToCart: (state, action) => {
-            // const productId = Number(action.payload); //re
+            // product id
             const productId = action.payload;
+            // product to add to cart
             const dataToAdd = state.cart.find(item => item.id === productId);
+            // increase the quantity
             dataToAdd.qty++;
+            // increase the quantity
             state.totalItem++;
         },
         sortProducts: (state, action) => {
+            // products
             const products = state.products;
+            // sort the data
             products.sort((x, y) => x.price - y.price);
+            // update the products in store
             state.products = products;
-            // state.sortedData = sortedProducts;
+            
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-// export const { } = productsSlice.actions
 
-
-export const { deleteProduct, addToCart, sortProducts, getSingleProduct, updateProducts,removeFromCart,removeOneItemFromCart,addOneItemToCart,addProduct } = productsSlice.actions;
+// all action functions 
+export const { deleteProduct, addToCart, sortProducts, getSingleProduct, updateProducts, removeFromCart, removeOneItemFromCart, addOneItemToCart, addProduct } = productsSlice.actions;
 
 export const getProductsFromAPI = () => {
 
     return async (dispatch) => {
-
+        // set loading state to true
         dispatch(productsSlice.actions.setLoading(true));
-        // Get data from API
+        // get data from store
         const getData = async () => {
             const res = await fetch('https://my-json-server.typicode.com/himanshu-hota/ecom/db');
-            const data = await res.json();
+            if (!res.ok) {
+                throw new Response("Unable to get data from server", { status: 404 });
+            }
+            const data = res.json();
 
             return data;
         }
-
-        const products = await getData();
-        dispatch(productsSlice.actions.getProducts(products.products));
+        // call the data
+        const data = await getData();
+        // set data to store
+        dispatch(productsSlice.actions.setProducts(data.products));
+        // set loading state to false
         dispatch(productsSlice.actions.setLoading(false));
-
     }
 }
 
 
+// for testing only
 export const setProductsLocal = () => {
 
     return (dispatch) => {

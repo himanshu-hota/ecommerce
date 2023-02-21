@@ -6,9 +6,12 @@ import { useSelector,useDispatch } from 'react-redux/es/exports';
 const ProductDetails = () => {
 
     const dispatch = useDispatch();
+    // products from store
     const product = useSelector(state => state.productsReducer.singleProduct);
+    // destructure data 
     const {id,title,description,price,rating,image} = product;
     
+    // function to handle submit 
     const handleCart = () => {
         dispatch(addToCart(id));
     }

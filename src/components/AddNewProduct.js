@@ -11,15 +11,18 @@ const AddNewProduct = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    // functinn to add a product to store
     const handleSubmit = (data) => {
         
         const finalData = {
 
             id,
-            qty:0,
+            qty:1,
             ...data
         }
         dispatch(addProduct(finalData));
+
+        // go to home
         navigate('..');
         
     }

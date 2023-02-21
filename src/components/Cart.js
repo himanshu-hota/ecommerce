@@ -5,22 +5,26 @@ import { BsCartDash, BsCartPlus } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux/es/exports';
 import { removeFromCart,removeOneItemFromCart,addOneItemToCart } from '../store/productsSlice';
+import { toast } from 'react-toastify';
 
 const CartItem = (props) => {
-
+    // destructure
     const { id, title, rating, description, price, image, qty } = props.data;
-
     const dispatch = useDispatch();
+    // function to delete data from the store
     const handleCartDelete = () => {
         dispatch(removeFromCart(id));
+        toast.success('🦄 1 item deleted from cart!!');
     };
-
+    // function to remove 1 quantity from the product
     const handleRemoveOneItem = () => {
         dispatch(removeOneItemFromCart(id));
+        toast.success('🦄 1 quantity reduced from cart!!');
     };
-
+    // function to add 1 quantity to the product
     const handleAddOneItem = () => {
         dispatch(addOneItemToCart(id));
+        toast.success('🦄 1 quantity added to cart!!');
     };
 
 

@@ -6,31 +6,37 @@ import { BsCartPlus } from 'react-icons/bs';
 import { deleteProduct, addToCart } from '../store/productsSlice';
 import { useDispatch } from 'react-redux/es/exports';
 import { getSingleProduct } from '../store/productsSlice';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { toast } from 'react-toastify';
 
 const Product = (props) => {
 
+    // destructure data
     const { id, title, rating, description, price, image } = props.data;
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isLoading = useSelector(state => state.productsReducer.loading);
-
-
+    
+    // function to delete product
     const handleDelete = (e) => {
         e.preventDefault();
         dispatch(deleteProduct(id));
+        toast.success('🦄 Product Deleted!!');
     }
 
+    // function to product add cart
     const handleCart = (e) => {
         e.preventDefault();
         dispatch(addToCart(id));
+        toast.success('🦄 Added to Cart!!');
+        
     }
 
+    // function to set single product
     const setSingleProduct = () => {
         dispatch(getSingleProduct(id));
     }
 
+    // function to get single product data
     const getDetails = () => {
         dispatch(getSingleProduct(id));
         navigate(`product-details/${id}`);
@@ -60,8 +66,8 @@ const Product = (props) => {
 
                         <div className="buttons flex items-center gap-3 text-xl md:text-2xl">
                             <Link to={`edit-product/${id}`} className='hover:text-cyan-400' >{<FiEdit2 onClick={setSingleProduct} />}</Link>
-                            <button className='hover:text-cyan-400' disabled={isLoading} >{<BsCartPlus onClick={handleCart} data-id={id} />}</button>
-                            <button className='hover:text-cyan-400'  > {<AiOutlineDelete onClick={handleDelete} data-id={id} />}</button>
+                            <button className='hover:text-cyan-400' onClick={handleCart}>{<BsCartPlus    />}</button>
+                            <button className='hover:text-cyan-400' onClick={handleDelete}> {<AiOutlineDelete  />}</button>
 
                         </div>
                     </div>
