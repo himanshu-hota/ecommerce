@@ -55,8 +55,8 @@ const Product = (props) => {
 
 
                     <div className="price text-right md:text-left h-full md:flex md:flex-col md:justify-between ">
-                        <p className='w-full text-2xl md:text-3xl '>{title}</p>
-                        <p className='text-2xl md:text-3xl py-2'>${price}</p>
+                        <p className='w-full text-xl md:text-3xl '>{title.split(' ').slice(0, 3).join(' ') }</p>
+                        <p className='text-xl md:text-3xl py-2'>${price}</p>
                         <p>{rating}⭐</p>
                     </div>
 
