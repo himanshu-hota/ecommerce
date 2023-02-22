@@ -5,11 +5,15 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const RootLayout = () => {
+
+
+
   return (
     <>
+
       <Navbar />
       <Outlet />
-      <ToastContainer autoClose={3000} />
+      <ToastContainer autoClose={3000} newestOnTop />
     </>
   )
 }

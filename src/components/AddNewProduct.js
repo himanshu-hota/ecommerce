@@ -4,6 +4,7 @@ import Form from './Form';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../store/productsSlice';
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const AddNewProduct = () => {
 
@@ -21,7 +22,7 @@ const AddNewProduct = () => {
             ...data
         }
         dispatch(addProduct(finalData));
-
+        toast.success('🦄 Product added!!')
         // go to home
         navigate('..');
         

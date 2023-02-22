@@ -20,6 +20,7 @@ const Product = (props) => {
     const handleDelete = (e) => {
         e.preventDefault();
         dispatch(deleteProduct(id));
+        toast.dismiss();
         toast.success('🦄 Product Deleted!!');
     }
 
@@ -27,6 +28,7 @@ const Product = (props) => {
     const handleCart = (e) => {
         e.preventDefault();
         dispatch(addToCart(id));
+        toast.dismiss();
         toast.success('🦄 Added to Cart!!');
         
     }
@@ -44,7 +46,7 @@ const Product = (props) => {
 
     return (
         <>
-            <Glass name='product' height={'h-[200px]'} width={'w-full'} className='flex justify-between items-center p-3 drop-shadow-xl hover:border-cyan-400' >
+            <Glass name='product' height={'h-[200px]'} width={'w-full'} className='flex justify-between items-center p-3 drop-shadow-xl hover:border-cyan-400 scroll-smooth' >
                 <div className="poster w-[50%] md:w-[30%] h-full">
                     <img src={image} alt="product-0" className='h-full w-full rounded-sm drop-shadow-xl' onClick={getDetails} />
                 </div>
