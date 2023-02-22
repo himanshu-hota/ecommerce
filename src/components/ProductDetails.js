@@ -3,13 +3,12 @@ import Glass from './Glass';
 import { addToCart } from '../store/productsSlice';
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { toast } from 'react-toastify';
-import { useParams, useNavigate } from 'react-router';
+import { useParams } from 'react-router';
 
 const ProductDetails = () => {
 
     const [alreadyInCart, setAlreadyInCart] = useState(false);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     // products from store
     const product = useSelector(state => state.productsReducer.singleProduct);
     const cart = useSelector(state => state.productsReducer.cart);
@@ -25,10 +24,7 @@ const ProductDetails = () => {
         }
 
     }, [productId, cart])
-    // navigate to error page if user manually accesses product details
-    if (!product.id) {
-        return navigate('err');
-    }
+ 
 
     // destructure data 
     const { id, title, description, price, rating, image } = product;
@@ -43,9 +39,10 @@ const ProductDetails = () => {
     return (
         <div className="product-details w-full h-[92vh] bg-gradient-to-b from-gray-900 to-gray-700 text-white flex flex-col justify-center items-center font-mono scroll-smooth">
 
+        {!product.id && <p>No data to show , kindly go to home!!</p>}
 
-
-            <Glass name='product' height='h-[80%]' width='w-[80%]' className='p-4 flex flex-col md:flex-row justify-between items-center' >
+        (   product.id &&
+            {    <Glass name='product' height='h-[80%]' width='w-[80%]' className='p-4 flex flex-col md:flex-row justify-between items-center' >
                 <div className="poster h-[40%] md:h-full w-full ">
                     <img src={image} alt="product-0" className='h-full w-full md:object-contain rounded-md drop-shadow-xl' />
                 </div>
@@ -79,7 +76,7 @@ const ProductDetails = () => {
 
                     </div>
                 </div>
-            </Glass>
+            </Glass>})
 
         </div>
     )
