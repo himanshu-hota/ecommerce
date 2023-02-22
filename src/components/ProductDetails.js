@@ -41,8 +41,8 @@ const ProductDetails = () => {
 
         {!product.id && <p>No data to show , kindly go to home!!</p>}
 
-        (   product.id &&
-            {    <Glass name='product' height='h-[80%]' width='w-[80%]' className='p-4 flex flex-col md:flex-row justify-between items-center' >
+          { product.id &&
+            (  <Glass name='product' height='h-[80%]' width='w-[80%]' className='p-4 flex flex-col md:flex-row justify-between items-center' >
                 <div className="poster h-[40%] md:h-full w-full ">
                     <img src={image} alt="product-0" className='h-full w-full md:object-contain rounded-md drop-shadow-xl' />
                 </div>
@@ -76,7 +76,7 @@ const ProductDetails = () => {
 
                     </div>
                 </div>
-            </Glass>})
+            </Glass>)}
 
         </div>
     )
