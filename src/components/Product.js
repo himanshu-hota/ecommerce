@@ -48,7 +48,7 @@ const Product = (props) => {
         <>
             <Glass name='product' height={'h-[200px]'} width={'w-full'} className='flex justify-between items-center p-3 drop-shadow-xl hover:border-cyan-400 scroll-smooth' >
                 <div className="poster w-[50%] md:w-[30%] h-full">
-                    <img src={image} alt="product-0" className='h-full w-full rounded-sm drop-shadow-xl' onClick={getDetails} />
+                    <img src={image} alt="product-0" className='h-full w-full rounded-sm drop-shadow-xl cursor-pointer' onClick={getDetails} />
                 </div>
 
                 <div className="product-details w-[80%] h-full flex flex-col md:flex-row justify-between items-end p-3">

@@ -146,7 +146,7 @@ export const productsSlice = createSlice({
 // Action creators are generated for each case reducer function
 
 // all action functions 
-export const { deleteProduct, addToCart, sortProducts, getSingleProduct, updateProducts, removeFromCart, removeOneItemFromCart, addOneItemToCart, addProduct } = productsSlice.actions;
+export const { deleteProduct, addToCart, sortProducts, getSingleProduct, updateProducts, removeFromCart, removeOneItemFromCart, addOneItemToCart, addProduct} = productsSlice.actions;
 
 export const getProductsFromAPI = () => {
 
