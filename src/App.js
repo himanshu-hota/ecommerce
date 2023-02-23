@@ -34,7 +34,9 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    //initially get data from API
     dispatch(getProductsFromAPI());
+    //shpw welcome notification
     toast('Welcome to e-Com');
   }, [dispatch])
 
