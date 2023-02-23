@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux/es/exports';
 import { getSingleProduct } from '../store/productsSlice';
 import { toast } from 'react-toastify';
 
+
 const Product = (props) => {
 
     // destructure data
@@ -15,6 +16,8 @@ const Product = (props) => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+ 
     
     // function to delete product
     const handleDelete = (e) => {

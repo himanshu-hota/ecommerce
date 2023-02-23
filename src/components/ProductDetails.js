@@ -53,8 +53,8 @@ const ProductDetails = () => {
                 </div>
 
                 <div className="details flex flex-col justify-center items-center h-[60%] md:h-full w-full gap-3 md:gap-5 md:text-2xl mt-6 text-md md:px-5">
-                    <div className="title w-full">
-                        <h1>Name : {title}</h1>
+                    <div className="title text-xl md:text-2xl w-full">
+                        <h1>Name : {title.split(' ').slice(0, 3).join(' ')}</h1>
                     </div>
 
                     <div className="description w-full">
