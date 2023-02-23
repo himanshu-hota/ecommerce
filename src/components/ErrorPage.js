@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function ErrorPage() {
+    // get error information
     const error = useRouteError();
     // show notification 
     toast.error(`${error.data}`);

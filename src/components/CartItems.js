@@ -13,19 +13,27 @@ const CartItem = (props) => {
     const dispatch = useDispatch();
     // function to delete data from the store
     const handleCartDelete = () => {
+        // Remove item from the cart
         dispatch(removeFromCart(id));
+        // show notification
         toast.success('🦄 1 item deleted from cart!!');
     };
     // function to remove 1 quantity from the product
     const handleRemoveOneItem = () => {
+        // decrease one quantity from cart
         dispatch(removeOneItemFromCart(id));
+        // dismiss all previous notifications
         toast.dismiss();
+        // show notification
         toast.success('🦄 1 quantity reduced from cart!!');
     };
     // function to add 1 quantity to the product
     const handleAddOneItem = () => {
+        // increase one quantity from cart
         dispatch(addOneItemToCart(id));
+        // dismiss all previous notifications
         toast.dismiss();
+        // show notification
         toast.success('🦄 1 quantity added to cart!!');
     };
 

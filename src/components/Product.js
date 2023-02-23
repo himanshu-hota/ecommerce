@@ -22,28 +22,37 @@ const Product = (props) => {
     // function to delete product
     const handleDelete = (e) => {
         e.preventDefault();
+        // delete product
         dispatch(deleteProduct(id));
+        // dismiss previous notification
         toast.dismiss();
+        // show notification
         toast.success('🦄 Product Deleted!!');
     }
 
     // function to product add cart
     const handleCart = (e) => {
         e.preventDefault();
+        // add an item to cart
         dispatch(addToCart(id));
+        // dismiss all previous notification
         toast.dismiss();
+        // show notification
         toast.success('🦄 Added to Cart!!');
         
     }
 
     // function to set single product
     const setSingleProduct = () => {
+        // set single product data
         dispatch(getSingleProduct(id));
     }
 
     // function to get single product data
     const getDetails = () => {
+        // get single product data
         dispatch(getSingleProduct(id));
+        // redirect to the product details page
         navigate(`product-details/${id}`);
     }
 

@@ -12,6 +12,7 @@ const Homepage = () => {
     const isLoading = useSelector(state => state.productsReducer.loading);
     // function to sort data
     const sortData = () => {
+        // sort data
         dispatch(sortProducts());
     }
 

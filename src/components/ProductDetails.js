@@ -12,7 +12,9 @@ const ProductDetails = () => {
     const dispatch = useDispatch();
     // products from store
     const product = useSelector(state => state.productsReducer.singleProduct);
+    // cart data from store(database)
     const cart = useSelector(state => state.productsReducer.cart);
+    // productId from params
     const { productId } = useParams();
 
 
@@ -32,12 +34,16 @@ const ProductDetails = () => {
 
     // function to handle submit 
     const handleCart = () => {
+        // add item to the cart
         dispatch(addToCart(id));
+        // dismiss all notification
         toast.dismiss();
+        // show notification
         toast.success('🦄 Product added to cart!!')
     }
 
     const handleBack = () => {
+        // go to back
         navigate(-1);
     }
 
@@ -77,8 +83,6 @@ const ProductDetails = () => {
                         {
                             !alreadyInCart && <button className="w-full bg-cyan-600 text-white p-2 rounded-md hover:opacity-80 active:text-black italic " onClick={handleCart} >Add to Cart</button>
                         }
-
-
                         
                            <button className="w-full bg-gray-600 text-white p-2 rounded-md hover:opacity-80 active:text-black italic mt-2" onClick={handleBack} >Go Back</button>
                         

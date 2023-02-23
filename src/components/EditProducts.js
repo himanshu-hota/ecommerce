@@ -19,19 +19,26 @@ const EditProducts = () => {
     const product = useSelector(state => state.productsReducer.singleProduct);
     // function to update data 
     const updateData = (updatedProductData) => {
+        // structure data for adding in the store(database)
         const finalData = {
             id: productId,
             ...updatedProductData
         }
+        // update data in the store(database)
         dispatch(updateProducts(finalData));
+        // go to home
         navigate('..');
+        // show notification
         toast.success('🦄 Product Updated!!');
     }
     // functions to delete data from store
     const handleDelete = (e) => {
         e.preventDefault();
+        // delete one product from store
         dispatch(deleteProduct(product.id));
+        // go to home
         navigate('..');
+        // show notification
         toast.success('🦄 Product Deleted!!');
     }
 

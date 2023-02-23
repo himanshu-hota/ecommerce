@@ -8,20 +8,22 @@ import { toast } from 'react-toastify';
 
 const AddNewProduct = () => {
 
+    // Generate unique ids
     const id = Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // functinn to add a product to store
+    // functinn to add a product to store(database)
     const handleSubmit = (data) => {
-        
+        // Structuring data for adding in the database
         const finalData = {
-
             id,
             qty:1,
             ...data
         }
+        // Add data to the store
         dispatch(addProduct(finalData));
+        //show notification
         toast.success('🦄 Product added!!')
         // go to home
         navigate('..');
